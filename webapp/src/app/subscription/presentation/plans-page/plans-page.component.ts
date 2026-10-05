@@ -1,11 +1,11 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SubscriptionService } from '../../application/subscription.service';
 import { Plan } from '../../domain/plan.entity';
 
 @Component({
     selector: 'app-plans-page',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './plans-page.component.html',
     styleUrl: './plans-page.component.css'
 })
