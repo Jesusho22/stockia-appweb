@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, inject, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { IamApiService } from '../../infrastructure/iam-api.service';
 import { AuthService } from '../../application/auth.service';
@@ -11,6 +11,7 @@ import { UserRole, ROLE_LABEL } from '../../domain/role.enum';
     selector: 'app-roles-list',
     imports: [ReactiveFormsModule],
     templateUrl: './roles-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './roles-list.component.css'
 })
 export class RolesListComponent implements OnInit {

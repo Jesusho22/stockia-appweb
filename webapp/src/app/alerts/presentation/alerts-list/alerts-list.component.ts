@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AlertsService } from '../../application/alerts.service';
@@ -8,6 +8,7 @@ import { Alert, AlertSeverity, AlertType, AlertChannel, ALERT_TYPE_LABEL } from 
     selector: 'app-alerts-list',
     imports: [CommonModule, ReactiveFormsModule],
     templateUrl: './alerts-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './alerts-list.component.css'
 })
 export class AlertsListComponent implements OnInit {

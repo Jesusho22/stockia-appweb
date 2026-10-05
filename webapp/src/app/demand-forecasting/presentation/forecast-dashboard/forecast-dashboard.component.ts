@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, computed, signal } from '@angular/core';
+import { Component, OnInit, inject, computed, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ForecastService } from '../../application/forecast.service';
 
@@ -6,6 +6,7 @@ import { ForecastService } from '../../application/forecast.service';
     selector: 'app-forecast-dashboard',
     imports: [CommonModule],
     templateUrl: './forecast-dashboard.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './forecast-dashboard.component.css'
 })
 export class ForecastDashboardComponent implements OnInit {

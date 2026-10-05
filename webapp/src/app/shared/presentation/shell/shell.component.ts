@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../iam/application/auth.service';
 import { UserRole } from '../../../iam/domain/role.enum';
@@ -14,6 +14,7 @@ interface NavItem {
     selector: 'app-shell',
     imports: [RouterLink, RouterLinkActive, RouterOutlet],
     templateUrl: './shell.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './shell.component.css'
 })
 export class ShellComponent {

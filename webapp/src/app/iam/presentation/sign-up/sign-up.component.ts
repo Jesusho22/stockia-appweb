@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../application/auth.service';
@@ -7,6 +7,7 @@ import { AuthService } from '../../application/auth.service';
     selector: 'app-sign-up',
     imports: [ReactiveFormsModule, RouterLink],
     templateUrl: './sign-up.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: '../sign-in/sign-in.component.css'
 })
 export class SignUpComponent {

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InventoryService } from '../../../product-inventory/application/inventory.service';
 import { AlertsService } from '../../../alerts/application/alerts.service';
@@ -13,6 +13,7 @@ import { StockStatus, STOCK_STATUS_LABEL } from '../../../product-inventory/doma
     selector: 'app-business-dashboard',
     imports: [CommonModule],
     templateUrl: './business-dashboard.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './business-dashboard.component.css'
 })
 export class BusinessDashboardComponent implements OnInit {

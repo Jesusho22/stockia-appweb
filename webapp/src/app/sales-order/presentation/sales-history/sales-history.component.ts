@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SalesService } from '../../application/sales.service';
 import { SaleStatus, SALE_STATUS_LABEL, SALE_CHANNEL_LABEL } from '../../domain/sale.entity';
@@ -11,6 +11,7 @@ import { SaleStatus, SALE_STATUS_LABEL, SALE_CHANNEL_LABEL } from '../../domain/
     selector: 'app-sales-history',
     imports: [CommonModule],
     templateUrl: './sales-history.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './sales-history.component.css'
 })
 export class SalesHistoryComponent implements OnInit {

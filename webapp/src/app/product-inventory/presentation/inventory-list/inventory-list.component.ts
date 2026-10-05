@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { InventoryService } from '../../application/inventory.service';
 import { InventoryItem, StorageType, STORAGE_LABEL, STOCK_STATUS_LABEL, StockStatus } from '../../domain/inventory-item.entity';
@@ -7,6 +7,7 @@ import { InventoryItem, StorageType, STORAGE_LABEL, STOCK_STATUS_LABEL, StockSta
     selector: 'app-inventory-list',
     imports: [ReactiveFormsModule],
     templateUrl: './inventory-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './inventory-list.component.css'
 })
 export class InventoryListComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../application/auth.service';
 import { ROLE_LABEL } from '../../domain/role.enum';
@@ -8,6 +8,7 @@ import { ROLE_LABEL } from '../../domain/role.enum';
     selector: 'app-profile',
     imports: [ReactiveFormsModule],
     templateUrl: './profile.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './profile.component.css'
 })
 export class ProfileComponent {

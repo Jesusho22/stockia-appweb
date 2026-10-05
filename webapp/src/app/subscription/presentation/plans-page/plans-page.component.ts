@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 
 import { SubscriptionService } from '../../application/subscription.service';
 import { Plan } from '../../domain/plan.entity';
@@ -7,6 +7,7 @@ import { Plan } from '../../domain/plan.entity';
     selector: 'app-plans-page',
     imports: [],
     templateUrl: './plans-page.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './plans-page.component.css'
 })
 export class PlansPageComponent implements OnInit {

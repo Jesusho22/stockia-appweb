@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InventoryService } from '../../application/inventory.service';
 import { Recipe, RecipeIngredientLine } from '../../domain/recipe.entity';
@@ -8,6 +8,7 @@ import { SalesService } from '../../../sales-order/application/sales.service';
     selector: 'app-recipe-list',
     imports: [FormsModule],
     templateUrl: './recipe-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './recipe-list.component.css'
 })
 export class RecipeListComponent implements OnInit {
