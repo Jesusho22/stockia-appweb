@@ -1,6 +1,6 @@
 # StockIA — Web Application (Frontend, Angular)
 
-Frontend de la Web Application de **StockIA** (DataBite Corp — equipo DataBit, 1ASI0729), construido en Angular 18
+Frontend de la Web Application de **StockIA** (DataBite Corp — equipo DataBit, 1ASI0729), construido en Angular 22
 standalone, siguiendo la misma arquitectura DDD por Bounded Context que `qullqa-webapp`
 (`upc-pre-202610-1asi0730-17953-flowbit`), adaptada a los User Stories y al modelo de dominio de StockIA
 (Capítulo III y Capítulo IV del informe).

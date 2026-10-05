@@ -8,7 +8,7 @@ Este repo tiene dos partes independientes:
 
 ```
 stockia-platform/
-├── webapp/      # Angular 18 standalone — frontend de la Web Application
+├── webapp/      # Angular 22 standalone — frontend de la Web Application
 └── mock-api/    # json-server — API REST simulada (db.json editable)
 ```
 
@@ -68,6 +68,6 @@ npm start
 
 ## Stack
 
-- **Frontend:** Angular 18 (standalone components, signals), arquitectura DDD por Bounded Context.
+- **Frontend:** Angular 22 (standalone components, signals; requiere Node.js ≥ 22.22.3 o ≥ 24.15), arquitectura DDD por Bounded Context.
 - **Fake API embebida:** `angular-in-memory-web-api`.
 - **Mock API standalone:** `json-server` + `cors` (mismo patrón que `qullqa-mock-api`).
