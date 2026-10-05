@@ -10,11 +10,10 @@ import { StockStatus, STOCK_STATUS_LABEL } from '../../../product-inventory/doma
 // Inventory & Recipe Management, Alerts & Recommendations y Demand Forecasting
 // a través de identidad (ids), nunca accediendo directo a sus repositorios.
 @Component({
-  selector: 'app-business-dashboard',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './business-dashboard.component.html',
-  styleUrl: './business-dashboard.component.css',
+    selector: 'app-business-dashboard',
+    imports: [CommonModule],
+    templateUrl: './business-dashboard.component.html',
+    styleUrl: './business-dashboard.component.css'
 })
 export class BusinessDashboardComponent implements OnInit {
   inventory = inject(InventoryService);

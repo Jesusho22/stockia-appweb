@@ -8,11 +8,10 @@ import { UserRole, ROLE_LABEL } from '../../domain/role.enum';
 // Presentación del Bounded Context IAM — gestión de equipo: asignar roles
 // (US23), invitar nuevos integrantes y darlos de baja (US33).
 @Component({
-  selector: 'app-roles-list',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './roles-list.component.html',
-  styleUrl: './roles-list.component.css',
+    selector: 'app-roles-list',
+    imports: [ReactiveFormsModule],
+    templateUrl: './roles-list.component.html',
+    styleUrl: './roles-list.component.css'
 })
 export class RolesListComponent implements OnInit {
   private api = inject(IamApiService);

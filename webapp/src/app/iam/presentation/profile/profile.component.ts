@@ -5,11 +5,10 @@ import { ROLE_LABEL } from '../../domain/role.enum';
 
 // Presentación del Bounded Context IAM — editar el propio perfil (US32).
 @Component({
-  selector: 'app-profile',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css',
+    selector: 'app-profile',
+    imports: [ReactiveFormsModule],
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
   private fb = inject(FormBuilder);

@@ -8,11 +8,10 @@ import { SaleStatus, SALE_STATUS_LABEL, SALE_CHANNEL_LABEL } from '../../domain/
 // real de Sale no hay de dónde recopilar históricos de venta — esta pantalla
 // es, junto con SalesService, la cobertura real de esa historia de usuario.
 @Component({
-  selector: 'app-sales-history',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './sales-history.component.html',
-  styleUrl: './sales-history.component.css',
+    selector: 'app-sales-history',
+    imports: [CommonModule],
+    templateUrl: './sales-history.component.html',
+    styleUrl: './sales-history.component.css'
 })
 export class SalesHistoryComponent implements OnInit {
   sales = inject(SalesService);

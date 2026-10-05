@@ -5,11 +5,10 @@ import { Recipe, RecipeIngredientLine } from '../../domain/recipe.entity';
 import { SalesService } from '../../../sales-order/application/sales.service';
 
 @Component({
-  selector: 'app-recipe-list',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './recipe-list.component.html',
-  styleUrl: './recipe-list.component.css',
+    selector: 'app-recipe-list',
+    imports: [FormsModule],
+    templateUrl: './recipe-list.component.html',
+    styleUrl: './recipe-list.component.css'
 })
 export class RecipeListComponent implements OnInit {
   inventory = inject(InventoryService);

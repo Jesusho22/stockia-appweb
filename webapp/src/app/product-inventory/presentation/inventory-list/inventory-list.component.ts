@@ -4,11 +4,10 @@ import { InventoryService } from '../../application/inventory.service';
 import { InventoryItem, StorageType, STORAGE_LABEL, STOCK_STATUS_LABEL, StockStatus } from '../../domain/inventory-item.entity';
 
 @Component({
-  selector: 'app-inventory-list',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './inventory-list.component.html',
-  styleUrl: './inventory-list.component.css',
+    selector: 'app-inventory-list',
+    imports: [ReactiveFormsModule],
+    templateUrl: './inventory-list.component.html',
+    styleUrl: './inventory-list.component.css'
 })
 export class InventoryListComponent implements OnInit {
   private fb = inject(FormBuilder);

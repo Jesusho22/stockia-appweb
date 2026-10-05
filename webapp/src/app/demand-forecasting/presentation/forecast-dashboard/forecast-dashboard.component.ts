@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ForecastService } from '../../application/forecast.service';
 
 @Component({
-  selector: 'app-forecast-dashboard',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './forecast-dashboard.component.html',
-  styleUrl: './forecast-dashboard.component.css',
+    selector: 'app-forecast-dashboard',
+    imports: [CommonModule],
+    templateUrl: './forecast-dashboard.component.html',
+    styleUrl: './forecast-dashboard.component.css'
 })
 export class ForecastDashboardComponent implements OnInit {
   forecast = inject(ForecastService);

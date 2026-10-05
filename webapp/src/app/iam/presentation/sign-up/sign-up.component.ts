@@ -4,11 +4,10 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../application/auth.service';
 
 @Component({
-  selector: 'app-sign-up',
-  standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
-  templateUrl: './sign-up.component.html',
-  styleUrl: '../sign-in/sign-in.component.css',
+    selector: 'app-sign-up',
+    imports: [ReactiveFormsModule, RouterLink],
+    templateUrl: './sign-up.component.html',
+    styleUrl: '../sign-in/sign-in.component.css'
 })
 export class SignUpComponent {
   private fb = inject(FormBuilder);

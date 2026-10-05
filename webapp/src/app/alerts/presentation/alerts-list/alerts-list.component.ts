@@ -5,11 +5,10 @@ import { AlertsService } from '../../application/alerts.service';
 import { Alert, AlertSeverity, AlertType, AlertChannel, ALERT_TYPE_LABEL } from '../../domain/alert.entity';
 
 @Component({
-  selector: 'app-alerts-list',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './alerts-list.component.html',
-  styleUrl: './alerts-list.component.css',
+    selector: 'app-alerts-list',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './alerts-list.component.html',
+    styleUrl: './alerts-list.component.css'
 })
 export class AlertsListComponent implements OnInit {
   private fb = inject(FormBuilder);

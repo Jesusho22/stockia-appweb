@@ -4,11 +4,10 @@ import { SubscriptionService } from '../../application/subscription.service';
 import { Plan } from '../../domain/plan.entity';
 
 @Component({
-  selector: 'app-plans-page',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './plans-page.component.html',
-  styleUrl: './plans-page.component.css',
+    selector: 'app-plans-page',
+    imports: [CommonModule],
+    templateUrl: './plans-page.component.html',
+    styleUrl: './plans-page.component.css'
 })
 export class PlansPageComponent implements OnInit {
   sub = inject(SubscriptionService);

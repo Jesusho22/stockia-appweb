@@ -5,11 +5,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../application/auth.service';
 
 @Component({
-  selector: 'app-sign-in',
-  standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
-  templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.css',
+    selector: 'app-sign-in',
+    imports: [ReactiveFormsModule, RouterLink],
+    templateUrl: './sign-in.component.html',
+    styleUrl: './sign-in.component.css'
 })
 export class SignInComponent {
   private fb = inject(FormBuilder);
