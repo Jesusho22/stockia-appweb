@@ -1,73 +1,56 @@
 # StockIA — Web Application Platform
 
-Frontend de la Web Application de **StockIA** (equipo DataBit, proyecto académico StockIA / DataBite Corp) más
-su API simulada, siguiendo la misma arquitectura DDD-por-Bounded-Context de referencia del curso (Qullqa /
-equipo Flowbit).
-
-Este repo tiene dos partes independientes:
+Frontend of the **StockIA** Web Application (DataBit team, Open Source course — UPC). The application is written in
+**Angular 22 + Angular Material + ngx-translate**, organized by the eight bounded contexts of the StockIA domain, and
+consumes the **StockIA Platform** RESTful API built with Spring Boot:
+https://github.com/Jesusho22/stockia-platform-os
 
 ```
-stockia-platform/
-├── webapp/      # Angular 22 standalone — frontend de la Web Application
-└── mock-api/    # json-server — API REST simulada (db.json editable)
+stockia-appweb/
+├── webapp/      # Angular 22 web application (see webapp/README.md)
+└── mock-api/    # json-server mock API used before the RESTful API existed (kept for reference)
 ```
 
-## La mock API ya está desplegada
-
-**https://stockia-mock-api.onrender.com/api/v1** — el `webapp` apunta ahí por defecto, no hace falta levantar
-nada más para probar el frontend en local:
+## Quick start
 
 ```bash
+# 1. API (in the stockia-platform-os repository)
+SPRING_PROFILES_ACTIVE=local mvn spring-boot:run      # http://localhost:8181 with demo data
+
+# 2. Web application
 cd webapp
 npm install
-npm start
-# http://localhost:4200
+npm start                                            # http://localhost:4200
 ```
 
-(El plan gratuito de Render duerme el servicio tras ~15 min sin tráfico; el primer request tras dormir tarda
-unos segundos en responder.)
+Demo accounts (password `stockia123`): `admin@databitecorp.com` and `empleado@databitecorp.com`.
 
-**Opción offline (fake API embebida en el navegador, sin red):** en `webapp/src/environments/environment.ts`
-pon `useFakeApi: true`.
+GitHub Actions builds the application and runs an end-to-end test (Playwright) against the real API.
 
-**Opción con la mock API corriendo en tu máquina** (para editar `db.json` y ver los cambios al instante):
+## Features (user stories of Chapter III)
 
-```bash
-# Terminal 1
-cd mock-api
-npm install
-npm start
-# http://localhost:3000
-
-# Terminal 2 — cambia apiBaseUrl a 'http://localhost:3000/api/v1' en environment.ts
-cd webapp
-npm install
-npm start
-```
-
-## Funcionalidades (User Stories del Capítulo III)
-
-| Módulo | Funcionalidad |
+| Bounded context | Features |
 |---|---|
-| Autenticación | Registro, login, editar mi perfil (US29, US30, US32) |
-| Equipo | Invitar integrantes, asignar roles, dar de baja (US23, US33) |
-| Inventario | CRUD de insumos, vida útil (US19, US22) |
-| Recetas | Crear, editar, eliminar recetas vinculadas al inventario (US20, US34) |
-| Ventas | Registrar venta (valida stock), historial, anular venta (US27, US35) |
-| Predicción de demanda | Generar proyección de 7 días con IA simulada (US24) |
-| Alertas | CRUD completo de alertas, entrega multicanal para críticas, reintento de entrega (US26, US28) |
-| Recomendaciones | Aplicar recomendaciones automáticas de menú/compras (US25) |
-| Planes | Elegir/cambiar plan con Stripe/PayPal simulado (US31) |
+| IAM | Sign-in with account lock after 5 wrong passwords, password recovery link, profile, password change, team and roles, unlock (US29, US30, US32, US23, US33) |
+| Restaurant Registration | Restaurant sign-up (owner = first Administrator, free plan) and restaurant data |
+| Stock Management | Supply lots CRUD with exact quantities (32 decimals), shelf life and status (US19, US22) |
+| Recipes Management | Recipes linked to the inventory, dish price, sale with stock validation (expired lots are never used), sales history, void (US20, US34, US27, US35) |
+| ML & Recommendations | 7-day demand forecast with the ONNX model of the API (Peruvian calendar + Open-Meteo weather) and purchase / menu recommendations (US24, US25) |
+| Notifications & Messaging | Automatic and manual alerts, WhatsApp + email delivery for critical alerts, retries, acknowledgement (US26, US28) |
+| Subscription & Payments | Plan catalog and simulated Stripe / PayPal checkout (US31) |
+| Analytics & Dashboard | KPIs, attention list, recent alerts, projected demand and weekly savings |
 
-## Documentación
+## Documentation
 
-- [`webapp/README.md`](./webapp/README.md) — arquitectura DDD del frontend, cómo correrlo, cómo conectar un backend real.
-- [`webapp/DEPLOY-VERCEL.md`](./webapp/DEPLOY-VERCEL.md) — desplegar el frontend en Vercel.
-- [`mock-api/README.md`](./mock-api/README.md) — cómo editar los datos de ejemplo (`db.json`) y los endpoints disponibles.
-- [`mock-api/DEPLOY.md`](./mock-api/DEPLOY.md) — desplegar la mock API (Render recomendado) y conectarla al frontend.
+- [`webapp/README.md`](./webapp/README.md): architecture by bounded context, routes, how to run and test.
+- [`webapp/DEPLOY-VERCEL.md`](./webapp/DEPLOY-VERCEL.md): deploy the web application to Vercel.
+- [`mock-api/README.md`](./mock-api/README.md): legacy json-server mock API (no longer used by the web application).
 
 ## Stack
 
-- **Frontend:** Angular 22 (standalone components, signals; requiere Node.js ≥ 22.22.3 o ≥ 24.15), arquitectura DDD por Bounded Context.
-- **Fake API embebida:** `angular-in-memory-web-api`.
-- **Mock API standalone:** `json-server` + `cors` (mismo patrón que `qullqa-mock-api`).
+- **Web application:** Angular 22 (standalone components, signals), Angular Material (Material Design 3),
+  ngx-translate (EN default / ES), decimal.js for exact quantities.
+- **RESTful API:** Spring Boot 3.5, Spring Data JPA, Spring Security (JWT), MySQL, ONNX Runtime, OpenAPI —
+  [stockia-platform-os](https://github.com/Jesusho22/stockia-platform-os).
+- **Quality:** GitHub Actions (production build + Playwright end-to-end test against the API), GitFlow, Conventional
+  Commits, Semantic Versioning.

@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+/* StockIA brand: forest green (primary) and terracotta (accent). */
+:root {
+  @include mat.toolbar-overrides((container-background-color: #1f4631, container-text-color: white));
+  @include mat.sidenav-overrides((container-background-color: #14301f, container-text-color: white));
+}
+
+html {
+  height: 100%;
+  @include mat.theme((
+    color: (
+      primary: mat.$green-palette,
+      tertiary: mat.$orange-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  color-scheme: light;
+  background-color: #f4f7f5;
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}
