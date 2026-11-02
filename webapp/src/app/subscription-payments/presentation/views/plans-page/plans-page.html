@@ -24,7 +24,8 @@
               @for (provider of providers; track provider.method) {
                 <button mat-flat-button type="button" [disabled]="store.paying()" (click)="choose(plan, provider.method)"
                         [attr.aria-label]="'plans.pay-plan-with' | translate: {plan: plan.name, provider: provider.label}">
-                  {{ 'plans.pay-with' | translate: {provider: provider.label} }}
+                  @if (processing() === plan.id + '-' + provider.method) { {{ 'plans.processing' | translate }} }
+                  @else { {{ 'plans.pay-with' | translate: {provider: provider.label} }} }
                 </button>
               }
             </div>

@@ -29,7 +29,8 @@ import {QuantityPipe} from '../../../../shared/presentation/pipes/quantity.pipe'
   styles: `.recipes { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
     .head { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; } h3 { margin: 0; color: #14301f; }
     ul { padding-left: 18px; margin: 8px 0; } .price { font-size: 1.3rem; font-weight: 700; color: #1f4631; margin: 0; }
-    mat-card-actions { display: flex; flex-wrap: wrap; gap: 4px; }`
+    mat-card-actions { display: flex; flex-wrap: wrap; gap: 4px; }
+    mat-card.sold { outline: 3px solid #2e7d32; background: #e8f5e9; transition: background 0.3s; }`
 })
 export class RecipeList implements OnInit {
   protected readonly store = inject(RecipesManagementStore);
@@ -38,6 +39,8 @@ export class RecipeList implements OnInit {
   private readonly notifications = inject(NotificationService);
   private readonly language = inject(LanguageStore);
   protected readonly selling = signal<number | null>(null);
+  /** Recipe whose sale was just registered; its card is highlighted for two seconds. */
+  protected readonly justSold = signal<number | null>(null);
 
   ngOnInit(): void {
     Promise.all([this.store.loadRecipes(), this.stockStore.loadItems()]).catch(error => this.notifications.error(error, 'errors.load'));
@@ -48,8 +51,8 @@ export class RecipeList implements OnInit {
   }
 
   protected availabilityKey(recipe: Recipe): string {
-    return ({READY: 'recipes.availability.ready', NO_STOCK: 'recipes.availability.no-stock', EXPIRED: 'recipes.availability.expired'})
-      [this.store.availabilityOf(recipe)()];
+    const keys = {READY: 'recipes.availability.ready', NO_STOCK: 'recipes.availability.no-stock', EXPIRED: 'recipes.availability.expired'};
+    return keys[this.store.availabilityOf(recipe)()];
   }
 
   protected openForm(recipe: Recipe | null = null): void {
@@ -61,7 +64,11 @@ export class RecipeList implements OnInit {
     try {
       const result = await this.store.sell(recipe);
       if (result.blocked) this.dialog.open(SaleBlockedDialog, {data: result.blocked, maxWidth: '95vw'});
-      else this.notifications.success('recipes.sold', {dish: recipe.dishName, total: this.formatMoney(result.sale.total)});
+      else {
+        this.notifications.success('recipes.sold', {dish: recipe.dishName, total: this.formatMoney(result.sale.total)});
+        this.justSold.set(recipe.id);
+        setTimeout(() => this.justSold.update(id => (id === recipe.id ? null : id)), 2000);
+      }
     } catch (error) {
       this.notifications.error(error);
     } finally {

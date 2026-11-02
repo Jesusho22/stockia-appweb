@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import {inject, Pipe, PipeTransform} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {AppValidators} from '../validators';
@@ -9,7 +9,7 @@ import {AppValidators} from '../validators';
  */
 @Pipe({name: 'errorMessage', pure: false})
 export class ErrorMessagePipe implements PipeTransform {
-  constructor(private readonly translate: TranslateService) {}
+  private readonly translate = inject(TranslateService);
 
   transform(control: AbstractControl | null): string {
     const message = AppValidators.messageOf(control);

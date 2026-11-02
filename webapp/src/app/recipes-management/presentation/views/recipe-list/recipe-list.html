@@ -6,7 +6,7 @@
   @if (store.loadingRecipes()) { <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/> }
   <div class="recipes" role="list" [attr.aria-label]="'recipes.table-label' | translate">
     @for (recipe of store.recipes(); track recipe.id) {
-      <mat-card appearance="outlined" role="listitem">
+      <mat-card appearance="outlined" role="listitem" [class.sold]="justSold() === recipe.id">
         <mat-card-content>
           <div class="head">
             <h3>{{ recipe.dishName }}</h3>

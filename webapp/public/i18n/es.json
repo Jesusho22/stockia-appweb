@@ -5,8 +5,8 @@
   },
   "language": {
     "switcher": "Idioma",
-    "en": "Inglés",
-    "es": "Español"
+    "en": "Inglés (Estados Unidos)",
+    "es": "Español (Latinoamérica)"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -342,7 +342,7 @@
     "description": "Histórico de ventas confirmadas y anuladas, los datos de los que aprende la predicción de demanda.",
     "summary": "Resumen de ventas",
     "registered": "Ventas registradas",
-    "revenue": "Ingresos (ventas confirmadas)",
+    "revenue": "Ingresos totales del período (ventas confirmadas)",
     "table-label": "Ventas",
     "empty": "Aún no hay ventas. Usa \"Vender uno\" en Recetas para registrar la primera.",
     "void": "Anular",
@@ -502,8 +502,9 @@
     "per-month": "/mes",
     "pay-with": "Pagar con {{provider}}",
     "pay-plan-with": "Pagar el plan {{plan}} con {{provider}}",
-    "activated": "El plan {{plan}} está activo.",
-    "simulated-note": "Pago simulado: no se procesan cobros reales."
+    "activated": "✓ Suscripción activada: plan {{plan}}.",
+    "simulated-note": "Pago simulado: no se procesan cobros reales.",
+    "processing": "Procesando…"
   },
   "dashboard": {
     "greeting": "Hola, {{name}}",
@@ -515,8 +516,8 @@
     "low-critical": "Stock bajo o crítico",
     "expiring-soon": "Vencen en 3 días o menos",
     "inventory-value": "Valor del inventario",
-    "critical-items": "Insumos que requieren atención",
-    "no-critical-items": "Ningún insumo requiere atención.",
+    "critical-items": "Insumos críticos",
+    "no-critical-items": "Sin insumos en estado crítico.",
     "recent-alerts": "Alertas recientes",
     "no-alerts": "Sin alertas.",
     "see-all-alerts": "Ver todas las alertas",

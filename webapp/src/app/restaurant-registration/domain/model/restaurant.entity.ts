@@ -10,7 +10,7 @@ export class Restaurant implements BaseEntity {
     public name: string,
     public address: string,
     public phone: string,
-    readonly latitude: number = -12.0464,
-    readonly longitude: number = -77.0428
+    readonly latitude = -12.0464,
+    readonly longitude = -77.0428
   ) {}
 }

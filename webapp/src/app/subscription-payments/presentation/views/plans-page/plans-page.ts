@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -29,6 +29,8 @@ import {LocalDatePipe} from '../../../../shared/presentation/pipes/local-date.pi
 export class PlansPage implements OnInit {
   protected readonly store = inject(SubscriptionPaymentsStore);
   private readonly notifications = inject(NotificationService);
+  /** Plan and method being paid, so only that button shows "Processing…". */
+  protected readonly processing = signal<string | null>(null);
   protected readonly providers: {method: PaymentMethod; label: string}[] = [{method: 'STRIPE', label: 'Stripe'}, {method: 'PAYPAL', label: 'PayPal'}];
 
   ngOnInit(): void {
@@ -40,11 +42,14 @@ export class PlansPage implements OnInit {
   }
 
   protected async choose(plan: Plan, method: PaymentMethod): Promise<void> {
+    this.processing.set(`${plan.id}-${method}`);
     try {
       await this.store.changePlan(plan, method);
       this.notifications.success('plans.activated', {plan: plan.name});
     } catch (error) {
       this.notifications.error(error);
+    } finally {
+      this.processing.set(null);
     }
   }
 }

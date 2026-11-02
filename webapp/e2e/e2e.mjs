@@ -118,6 +118,7 @@ await step('recipes and sales', async () => {
   await page.getByRole('button', {name: 'Sell one Chicken Caesar Salad'}).click();
   await snackbar().getByText('Chicken Caesar Salad sold for S/ 3.12').waitFor();
   check('dish sold at the cost of its ingredients', true);
+  check('sold dish is highlighted', (await page.locator('mat-card.sold').textContent()).includes('Chicken Caesar Salad'));
   await page.getByRole('link', {name: 'Sales history'}).click();
   await page.locator('tr.mat-mdc-row').first().waitFor();
   const firstSale = await page.locator('tr.mat-mdc-row').first().textContent();
@@ -194,7 +195,7 @@ await step('team and plans', async () => {
   check('member removed', true);
   await page.goto(`${BASE}/app/settings/plans`);
   await page.getByRole('button', {name: 'Pay the Profesional plan with Stripe'}).click();
-  await snackbar().getByText('The Profesional plan is active.').waitFor();
+  await snackbar().getByText('✓ Subscription activated: Profesional plan.').waitFor();
   check('plan upgraded with the simulated Stripe checkout', (await page.locator('mat-card.highlighted').textContent()).includes('Your current plan'));
   await shot('08-plans');
   await page.goto(`${BASE}/app/settings/account`);

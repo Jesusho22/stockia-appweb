@@ -5,8 +5,8 @@
   },
   "language": {
     "switcher": "Language",
-    "en": "English",
-    "es": "Spanish"
+    "en": "English (United States)",
+    "es": "Spanish (Latin America)"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -342,7 +342,7 @@
     "description": "History of confirmed and voided sales, the data the demand forecast learns from.",
     "summary": "Sales summary",
     "registered": "Registered sales",
-    "revenue": "Revenue (confirmed sales)",
+    "revenue": "Total revenue for the period (confirmed sales)",
     "table-label": "Sales",
     "empty": "No sales yet. Use \"Sell one\" in Recipes to register the first one.",
     "void": "Void",
@@ -502,8 +502,9 @@
     "per-month": "/month",
     "pay-with": "Pay with {{provider}}",
     "pay-plan-with": "Pay the {{plan}} plan with {{provider}}",
-    "activated": "The {{plan}} plan is active.",
-    "simulated-note": "Simulated payment: no real charges are processed."
+    "activated": "✓ Subscription activated: {{plan}} plan.",
+    "simulated-note": "Simulated payment: no real charges are processed.",
+    "processing": "Processing…"
   },
   "dashboard": {
     "greeting": "Hello, {{name}}",
@@ -515,8 +516,8 @@
     "low-critical": "Low or critical stock",
     "expiring-soon": "Expiring in 3 days or less",
     "inventory-value": "Inventory value",
-    "critical-items": "Supplies that need attention",
-    "no-critical-items": "No supplies need attention.",
+    "critical-items": "Critical supplies",
+    "no-critical-items": "No supplies in a critical state.",
     "recent-alerts": "Recent alerts",
     "no-alerts": "No alerts.",
     "see-all-alerts": "See all alerts",
