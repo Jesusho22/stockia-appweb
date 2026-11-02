@@ -13,6 +13,6 @@ import {environment} from '../../../environments/environment';
  */
 export const languageInterceptor: HttpInterceptorFn = (request, next) => {
   if (!request.url.startsWith(environment.platformProviderApiBaseUrl)) return next(request);
-  const language = document.documentElement.lang === 'es' ? 'es' : 'en';
+  const language = document.documentElement.lang.startsWith('es') ? 'es-419' : 'en-US';
   return next(request.clone({headers: request.headers.set('Accept-Language', language)}));
 };

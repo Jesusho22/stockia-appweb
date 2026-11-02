@@ -2,7 +2,7 @@
 
 Frontend of **StockIA** (DataBit, UPC — Open Source course): smart inventory, recipes, sales, alerts, demand forecast
 with Machine Learning and recommendations for restaurants. Built with **Angular 22**, **Angular Material** and
-**ngx-translate** (English by default, Spanish available), organized by bounded context and connected to the
+**ngx-translate** (English `en-US` by default, Latin American Spanish `es-419`), organized by bounded context and connected to the
 **StockIA Platform** RESTful API (Spring Boot): https://github.com/Jesusho22/stockia-platform-os
 
 ## Structure

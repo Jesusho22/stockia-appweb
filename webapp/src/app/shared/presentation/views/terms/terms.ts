@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {Location} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -40,7 +40,7 @@ import {LanguageSwitcher} from '../../components/language-switcher/language-swit
 export class Terms {
   protected readonly sections = ['service', 'accounts', 'data', 'payments', 'contact'];
 
-  constructor(private readonly location: Location) {}
+  private readonly location = inject(Location);
 
   protected back(): void {
     this.location.back();

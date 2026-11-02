@@ -17,10 +17,10 @@ export class LanguageStore {
   private readonly languageSignal = signal<AppLanguage>('en');
   readonly language = this.languageSignal.asReadonly();
   readonly languages: AppLanguage[] = ['en', 'es'];
-  readonly locale = computed(() => (this.languageSignal() === 'es' ? 'es-PE' : 'en-US'));
+  readonly locale = computed(() => (this.languageSignal() === 'es' ? 'es-419' : 'en-US'));
 
   constructor() {
-    let saved: string | null = null;
+    let saved: string | null;
     try {
       saved = localStorage.getItem(LANGUAGE_STORAGE_KEY);
     } catch {
@@ -32,7 +32,7 @@ export class LanguageStore {
   use(language: AppLanguage): void {
     this.languageSignal.set(language);
     this.translate.use(language);
-    document.documentElement.lang = language;
+    document.documentElement.lang = language === 'es' ? 'es-419' : 'en';
     try {
       localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
     } catch {

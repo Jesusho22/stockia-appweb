@@ -35,7 +35,7 @@ export class DecimalQuantity {
 
   /** Grouped digits in the language of the user, keeping every decimal. */
   static format(value: unknown, language = 'en'): string {
-    const formatter = new Intl.NumberFormat(language === 'es' ? 'es-PE' : 'en-US');
+    const formatter = new Intl.NumberFormat(language === 'es' ? 'es-419' : 'en-US');
     const [integer, fraction] = DecimalQuantity.of(value).toFixed().split('.');
     const sign = integer.startsWith('-') ? '-' : '';
     const grouped = formatter.format(BigInt(integer.replace('-', '')));
