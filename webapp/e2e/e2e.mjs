@@ -148,6 +148,8 @@ await step('forecast and recommendations', async () => {
 
 await step('alerts', async () => {
   await page.getByRole('link', {name: 'Alerts'}).click();
+  await page.waitForURL('**/app/alerts');
+  await page.getByRole('button', {name: 'New alert'}).waitFor();
   await page.locator('tr.mat-mdc-row').first().waitFor();
   const table = await page.locator('table').textContent();
   check('automatic alerts in English', table.includes('Beef tenderloin has no stock available.'), table);
@@ -199,13 +201,15 @@ await step('team and plans', async () => {
   check('plan upgraded with the simulated Stripe checkout', (await page.locator('mat-card.highlighted').textContent()).includes('Your current plan'));
   await shot('08-plans');
   await page.goto(`${BASE}/app/settings/account`);
-  await page.getByText('Restaurant data').waitFor();
+  await page.getByLabel('Restaurant name').waitFor();
   check('account settings show the restaurant data', (await page.getByLabel('Restaurant name').inputValue()).startsWith('DataBite'));
   await signOut();
 });
 
 const email = `owner${Date.now()}@example.com`;
 await step('sign-up', async () => {
+  await page.goto(`${BASE}/auth/sign-in`);
+  await page.evaluate(() => localStorage.clear());
   await page.goto(`${BASE}/auth/sign-up`);
   await page.getByLabel('Full name').fill('Luis Paz');
   await page.getByLabel('Restaurant name').fill('La Esquina');
@@ -222,6 +226,8 @@ await step('sign-up', async () => {
 });
 
 await step('password recovery', async () => {
+  await page.goto(`${BASE}/auth/sign-in`);
+  await page.evaluate(() => localStorage.clear());
   await page.goto(`${BASE}/auth/forgot-password`);
   await page.getByLabel('Email').fill(email);
   await page.getByRole('button', {name: 'Send recovery link'}).click();
