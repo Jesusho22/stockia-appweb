@@ -1,90 +1,69 @@
-# StockIA — Web Application (Frontend, Angular)
+# StockIA Web Application
 
-Frontend de la Web Application de **StockIA** (DataBite Corp — equipo DataBit, 1ASI0729), construido en Angular 22
-standalone, siguiendo la misma arquitectura DDD por Bounded Context que `qullqa-webapp`
-(`upc-pre-202610-1asi0730-17953-flowbit`), adaptada a los User Stories y al modelo de dominio de StockIA
-(Capítulo III y Capítulo IV del informe).
+Frontend of **StockIA** (DataBit, UPC — Open Source course): smart inventory, recipes, sales, alerts, demand forecast
+with Machine Learning and recommendations for restaurants. Built with **Angular 22**, **Angular Material** and
+**ngx-translate** (English `en-US` by default, Latin American Spanish `es-419`), organized by bounded context and connected to the
+**StockIA Platform** RESTful API (Spring Boot): https://github.com/Jesusho22/stockia-platform-os
 
-**Este repo es SOLO frontend.** No incluye backend real: por defecto, todas las peticiones HTTP van a la mock
-API desplegada en Render — **https://stockia-mock-api.onrender.com/api/v1** (repo
-[`stockia-mock-api`](../mock-api), `json-server`). También existe una fake API embebida en el propio navegador
-(`angular-in-memory-web-api`, ver `src/app/fake-api/in-memory-data.service.ts`) para correr sin conexión;
-actívala con `useFakeApi: true` en `src/environments/environment.ts`.
-
-## Arquitectura (DDD por Bounded Context)
+## Structure
 
 ```
 src/app/
-├── shared/presentation/shell/        # Layout (sidebar + topbar)
-├── iam/                               # User & Access Management
-│   ├── domain/                        # User, UserRole
-│   ├── application/                   # AuthService (sesión, signals)
-│   ├── infrastructure/                # IamApiService, guards
-│   └── presentation/                  # sign-in, sign-up, roles-list
-├── product-inventory/                 # Inventory & Recipe Management
-│   ├── domain/                        # InventoryItem (Aggregate Root), Recipe
-│   ├── application/                   # InventoryService
-│   ├── infrastructure/                # InventoryApiService
-│   └── presentation/                  # inventory-list, recipe-list
-├── demand-forecasting/                # Demand Forecasting
-├── alerts/                            # Alerts & Recommendations
-├── subscription/                      # Subscription & Billing
-├── dashboard/                         # Dashboard & Analytics
-└── fake-api/                          # InMemoryDataService (fake API)
+├── shared/                    base entity/assembler/endpoint/API, ApiError, DecimalQuantity, language store,
+│                              notifications, interceptor (Accept-Language), layout, footer (Terms), pipes, validators
+├── iam/                       sign-in, password recovery, team & roles, account settings, session, guards, JWT interceptor
+├── restaurant-registration/   restaurant sign-up and restaurant data
+├── subscription-payments/     plan catalog, subscription and simulated Stripe / PayPal checkout
+├── stock-management/          supply lots (exact quantities with up to 32 decimals), stock allocation preview
+├── recipes-management/        recipes, sale of a dish (422 CannotSell explained) and sales history
+├── notifications-messaging/   automatic and manual alerts, delivery retries and acknowledgement
+├── ml-recommendations/        demand forecast (ONNX model of the API) and recommendations
+└── analytics-dashboard/       KPIs and weekly savings
 ```
 
-Cada contexto separa **domain** (clases planas, sin Angular ni HTTP), **application** (servicios con estado
-reactivo vía `signal()`, equivalentes a las stores Pinia de Qullqa), **infrastructure** (el único lugar que
-conoce `HttpClient`) y **presentation** (componentes standalone).
+Every bounded context has the same layers:
 
-## Funcionalidades implementadas (User Stories del Capítulo III)
+| Layer | Content |
+|---|---|
+| `domain/model` | Entities with private fields and getters (`*.entity.ts`), commands and value types |
+| `infrastructure` | `*-response.ts` (API resources), `*-assembler.ts` (resource ⇄ entity), `*-api-endpoint.ts` (extends `BaseApiEndpoint`) and the `*-api.ts` facade (extends `BaseApi`) |
+| `application` | `*.store.ts`: state with signals and the use cases the views call (no view uses `HttpClient`) |
+| `presentation` | `views` (routed) and `components` (embedded), Angular Material + ngx-translate |
+| `*.routes.ts` | Lazy routes of the context |
 
-| US | Funcionalidad | Pantalla |
-|---|---|---|
-| US29 / US30 | Registro e inicio de sesión | `/auth/sign-up`, `/auth/sign-in` |
-| US19 | Gestionar inventario (alta/baja/edición) | `/app/inventory` |
-| US20 | Recetas vinculadas al inventario con descuento automático | `/app/recipes` (botón "Simular venta") |
-| US21 | Dashboard operativo con alertas y métricas | `/app/dashboard` |
-| US22 | Vida útil de insumos (catálogo interno, sin API externa) | `/app/inventory` (campo "Vida útil") |
-| US23 | Roles y permisos (Administrador / Empleado) | `/app/roles` |
-| US24 | Predicción de demanda con IA | `/app/forecast` |
-| US25 | Recomendaciones automáticas de menú/compras | `/app/recommendations` |
-| US26 / US28 | Alertas de stock e insumos por WhatsApp/correo | `/app/alerts` |
-| US31 | Planes y suscripción (Stripe/PayPal simulado) | `/app/plans` |
+## Routes
 
-No se tocó nada de backend real ni de infraestructura de despliegue del software — solo frontend y fake API, tal
-como se pidió.
+Public: `/auth/sign-in`, `/auth/sign-up` (the landing page buttons), `/auth/forgot-password`, `/auth/reset-password`,
+`/terms`. Application (session required): `/app/dashboard`, `/app/inventory`, `/app/recipes`, `/app/sales`,
+`/app/forecast`, `/app/alerts`, `/app/recommendations` (Administrator), `/app/roles` (Administrator),
+`/app/settings`, `/app/settings/account` (`/app/profile`), `/app/settings/help`, `/app/settings/plans`
+(Administrator, `/app/plans`).
 
-## Correr en local
+## Run
+
+Requirements: Node.js 22.22.3+ or 24.15+, and the StockIA Platform API running on `http://localhost:8181`.
 
 ```bash
 npm install
-npm start      # http://localhost:4200 — habla con https://stockia-mock-api.onrender.com por defecto
+npm start            # http://localhost:4200 (environment.development.ts → http://localhost:8181/api/v1)
+npm run build        # production build in dist/stockia-webapp/browser (environment.ts)
 ```
 
-Nota: el plan gratuito de Render "duerme" la mock API tras ~15 min sin tráfico; el primer request tras dormir
-puede tardar unos segundos en responder mientras despierta.
+Demo accounts (password `stockia123`): `admin@databitecorp.com` (Administrator) and `empleado@databitecorp.com`
+(Employee).
 
-Credenciales de prueba (ya precargadas en el formulario de login):
-- **Administrador:** `admin@databitecorp.com` / `stockia123`
-- **Empleado:** `empleado@databitecorp.com` / `stockia123` (usar "Iniciar sesión" manualmente con estos datos)
+The production API URL is `platformProviderApiBaseUrl` in `src/environments/environment.ts`; change it to the URL of
+your deployment of the API before deploying to Vercel (`vercel.json` already rewrites every path to `index.html`).
 
-## Conectar el backend real más adelante
+## Accessibility and i18n
 
-1. En `src/app/app.config.ts`, quita el bloque `...(environment.useFakeApi ? [...] : [])` (o pon
-   `useFakeApi: false` en `src/environments/environment.prod.ts`).
-2. Cambia `apiBaseUrl` en `src/environments/environment*.ts` a la URL del backend real.
-3. Ningún componente ni servicio de aplicación cambia: solo hablan con las clases `*ApiService` de la capa de
-   infraestructura, que son las únicas que conocen la URL.
+Skip link, landmarks (`banner`, `navigation`, `main`, `contentinfo`), labelled icon buttons, `aria-current` in the
+menu, live regions for results and errors, status shown with text and color. Texts are in `public/i18n/en.json` and
+`public/i18n/es.json`; the selected language is also sent to the API in `Accept-Language`, so API messages, alerts,
+recommendations and plan features arrive in the same language.
 
-## Build de producción
+## End-to-end test
 
-```bash
-npm run build
-```
-
-Genera los archivos estáticos en `dist/stockia-webapp/browser/`.
-
-## Despliegue en Vercel
-
-Ver `DEPLOY-VERCEL.md` en la raíz del proyecto para el paso a paso.
+`e2e/e2e.mjs` (Playwright) runs in GitHub Actions against the real API with demo data: guards and roles, sign-in
+attempts, inventory with 32 decimals, sale blocked by an expired supply, sale and void, ML forecast, recommendations,
+alerts delivery, Spanish, team, plans, sign-up and password recovery.
