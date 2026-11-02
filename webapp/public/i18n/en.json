@@ -722,7 +722,7 @@
   },
   "terms": {
     "title": "Terms of service",
-    "updated": "Last updated: October 2026",
+    "updated": "Last updated: November 2026",
     "intro": "These terms explain how DataBit provides StockIA to restaurants. By creating an account you accept them.",
     "sections": {
       "service": {
@@ -740,6 +740,18 @@
       "payments": {
         "title": "Plans and payments",
         "body": "The Esencial plan is free. Paid plans renew every 30 days. In this academic version payments with Stripe and PayPal are simulated and no real charges are made."
+      },
+      "predictions": {
+        "title": "Forecasts and automated decisions",
+        "body": "Demand forecasts come from a machine learning model trained with the restaurant's own sales, the Peruvian calendar and the weather. They are estimates with a stated confidence level: StockIA shows them as suggestions and never buys, discards or changes stock without a person's action, except the deduction of a sale the team registers."
+      },
+      "ethics": {
+        "title": "Professional and ethical responsibility",
+        "body": "DataBit develops StockIA following the Software Engineering Code of Ethics and Professional Practice (ACM/IEEE) and the Code of Ethics of the Colegio de Ingenieros del Perú (CIP): we act in the public interest and in the interest of our clients, we are honest about the limits of the product (for example, which features are simulated in this version), we protect the confidentiality of the data entrusted to us and we report and fix the defects we find."
+      },
+      "availability": {
+        "title": "Availability and changes",
+        "body": "We work to keep the service available, but it may be interrupted for maintenance or failures. If these terms change, we will publish the new version on this page with its date before it applies."
       },
       "contact": {
         "title": "Contact",

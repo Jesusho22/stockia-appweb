@@ -38,7 +38,7 @@ import {LanguageSwitcher} from '../../components/language-switcher/language-swit
     h1 { color: #14301f; } h2 { font-size: 1.1rem; color: #1f4631; margin-top: 20px; }`
 })
 export class Terms {
-  protected readonly sections = ['service', 'accounts', 'data', 'payments', 'contact'];
+  protected readonly sections = ['service', 'accounts', 'data', 'payments', 'predictions', 'ethics', 'availability', 'contact'];
 
   private readonly location = inject(Location);
 
