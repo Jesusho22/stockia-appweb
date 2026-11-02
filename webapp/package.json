@@ -1,6 +1,6 @@
 {
   "name": "stockia-webapp",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "StockIA Web Application (Angular 22 + Angular Material), organized by bounded context and connected to the StockIA Platform RESTful API.",
   "author": "DataBit",
   "license": "MIT",
