@@ -722,7 +722,7 @@
   },
   "terms": {
     "title": "Términos del servicio",
-    "updated": "Última actualización: octubre de 2026",
+    "updated": "Última actualización: noviembre de 2026",
     "intro": "Estos términos explican cómo DataBit ofrece StockIA a los restaurantes. Al crear una cuenta los aceptas.",
     "sections": {
       "service": {
@@ -740,6 +740,18 @@
       "payments": {
         "title": "Planes y pagos",
         "body": "El plan Esencial es gratuito. Los planes de pago se renuevan cada 30 días. En esta versión académica los pagos con Stripe y PayPal son simulados y no se realizan cobros reales."
+      },
+      "predictions": {
+        "title": "Predicciones y decisiones automatizadas",
+        "body": "Las predicciones de demanda provienen de un modelo de aprendizaje automático entrenado con las ventas del propio restaurante, el calendario peruano y el clima. Son estimaciones con un nivel de confianza indicado: StockIA las muestra como sugerencias y nunca compra, descarta ni cambia el stock sin la acción de una persona, salvo el descuento de una venta que registra el equipo."
+      },
+      "ethics": {
+        "title": "Responsabilidad profesional y ética",
+        "body": "DataBit desarrolla StockIA siguiendo el Código de Ética y Práctica Profesional de la Ingeniería de Software (ACM/IEEE) y el Código de Ética del Colegio de Ingenieros del Perú (CIP): actuamos en favor del interés público y de nuestros clientes, somos transparentes sobre los límites del producto (por ejemplo, qué funciones son simuladas en esta versión), protegemos la confidencialidad de los datos que se nos confían y reportamos y corregimos los defectos que encontramos."
+      },
+      "availability": {
+        "title": "Disponibilidad y cambios",
+        "body": "Trabajamos para mantener el servicio disponible, pero puede interrumpirse por mantenimiento o fallas. Si estos términos cambian, publicaremos la nueva versión en esta página con su fecha antes de que se aplique."
       },
       "contact": {
         "title": "Contacto",
