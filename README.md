@@ -7,9 +7,12 @@ https://github.com/Jesusho22/stockia-platform-os
 
 ```
 stockia-appweb/
-├── webapp/      # Angular 22 web application (see webapp/README.md)
-└── mock-api/    # json-server mock API used before the RESTful API existed (kept for reference)
+└── webapp/      # Angular 22 web application (see webapp/README.md)
 ```
+
+The web application only talks to the StockIA Platform RESTful API (Spring Boot + MySQL):
+`http://localhost:8181/api/v1` in development (`environment.development.ts`) and the deployed API in production
+(`environment.ts`). There is no mock API.
 
 ## Quick start
 
@@ -55,7 +58,6 @@ Not in this release (simulated or pending in the backlog): CSV sales import (US2
 
 - [`webapp/README.md`](./webapp/README.md): architecture by bounded context, routes, how to run and test.
 - [`webapp/DEPLOY-VERCEL.md`](./webapp/DEPLOY-VERCEL.md): deploy the web application to Vercel.
-- [`mock-api/README.md`](./mock-api/README.md): legacy json-server mock API (no longer used by the web application).
 
 ## Stack
 
